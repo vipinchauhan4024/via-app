@@ -16,4 +16,4 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - VIA-app.war
+    - target/VIA-app.war
