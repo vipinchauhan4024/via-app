@@ -1,0 +1,135 @@
+/*package testcheck;
+
+
+
+import java.io.IOException;
+import java.nio.channels.Channel;
+import java.util.Scanner;
+
+import com.ibm.mq.constants.MQConstants;
+import com.ibm.mq.headers.MQDataException;
+import com.ibm.mq.headers.pcf.*;
+
+
+public class CreateQueues {
+
+
+  *//** 
+   * @param args Input parameters.
+   *//*
+  public void createMqObjects() {
+	
+	
+	String srvConnChannel = "JAVA.CHANNEL";
+	int port = 5414;
+	String host = "localhost";
+	String senderQmgr;
+	String senderMISPID;
+	String senderAPMID;
+	String receiverQmgr;
+	String receiverAPMID;
+	String receiverMISPID;
+	
+	System.out.println("Enter Sender APMId:");
+	Scanner reader = new Scanner(System.in);
+	senderAPMID = reader.next();
+
+	System.out.println("Enter Information Entity:");
+	reader = new Scanner(System.in);
+	String infoEntity = reader.next();
+
+	
+	System.out.println("Enter Receiver APMId");
+	reader = new Scanner(System.in);
+	receiverAPMID = reader.next();
+	
+	GetApplicationDetails senderApp = new GetApplicationDetails(senderAPMID);
+	senderQmgr = senderApp.getQmgrName();
+	senderMISPID = senderApp.getMispID();
+	
+	GetApplicationDetails receiverApp = new GetApplicationDetails(receiverAPMID);
+	receiverQmgr 	= receiverApp.getQmgrName();
+	receiverMISPID 	= receiverApp.getMispID();
+	int queueType = MQConstants.MQQT_LOCAL;
+	
+	 try {
+		 PCFMessageAgent senderpcfCM =  new PCFMessageAgent(host, port, srvConnChannel);
+		 PCFMessageAgent receiverpcfCM =  new PCFMessageAgent(host, port, srvConnChannel);
+		 String recieverQueue = createReceiverQueue(receiverMISPID, infoEntity,queueType, receiverpcfCM);
+		 if (receiverQmgr.equalsIgnoreCase(senderQmgr)) {
+			 queueType = MQConstants.MQQT_ALIAS;
+		}
+		 createSenderQueue(senderMISPID, infoEntity,queueType,recieverQueue, senderpcfCM );
+		 
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	 
+    return;
+  }
+  
+  public static void createQueue(PCFMessageAgent pcfCM, String qName, int queueType, String recieverQueue, boolean transmitQueue)
+      throws MQDataException, IOException {
+    //int queueType = MQConstants.MQQT_LOCAL;
+
+    // Create the PCF message type for the create queue.
+    // NB: The parameters must be added in a specific order or an exception (3015)
+    // will be thrown.
+    PCFMessage pcfCmd = new PCFMessage(MQConstants.MQCMD_CREATE_Q);
+
+    // Queue name - Mandatory.
+    pcfCmd.addParameter(MQConstants.MQCA_Q_NAME, qName);
+
+    // Queue Type - Optional.
+    pcfCmd.addParameter(MQConstants.MQIA_Q_TYPE, queueType);
+    if(!recieverQueue.equals("")) {
+    pcfCmd.addParameter(MQConstants.MQCA_BASE_Q_NAME, recieverQueue);
+    }
+    if (transmitQueue) {
+      // Queue Type - This must be the second parameter!
+      pcfCmd.addParameter(MQConstants.MQIA_USAGE, MQConstants.MQUS_TRANSMISSION);
+    }
+
+    // Add description.
+    pcfCmd.addParameter(MQConstants.MQCA_Q_DESC, "Test queue created by util");
+
+    try {
+      pcfCM.send(pcfCmd);
+    }
+    catch (PCFException pcfe) {
+      if (pcfe.reasonCode == MQConstants.MQRCCF_OBJECT_ALREADY_EXISTS) {
+        System.out.println("The queue \"" + qName
+            + "\" already exists on the queue manager.");
+      }
+      else {
+        throw pcfe;
+      }
+    }
+    System.out.println("Queue "+qName+" created successfully");
+    return;
+  }
+  
+  public static void createSenderQueue(String mispId, String infoEntity, int queueType, String recieverQueue, PCFMessageAgent pcfCM ){
+	  String queueName = (mispId+".APP."+infoEntity+".OUT").toUpperCase();
+	  try {
+		createQueue(pcfCM, queueName, queueType, recieverQueue,false);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+  }
+  
+  public static String createReceiverQueue(String mispId, String infoEntity, int queueType, PCFMessageAgent pcfCM){
+	  String queueName = (mispId+".APP."+infoEntity+".IN").toUpperCase();
+	  try {
+		createQueue(pcfCM, queueName, queueType,"", false);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	  return queueName;
+  }
+  
+}
+*/

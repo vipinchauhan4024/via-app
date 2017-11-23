@@ -1,0 +1,36 @@
+package testcheck;
+
+import java.util.Scanner;
+
+
+
+
+public class CreateEndTEndPattern {
+
+	/**
+	 * @param args
+	 */
+	
+	
+
+	public static void main(String[] args) {
+		FindIntegrationComponents mqObj = new FindIntegrationComponents();
+		mqObj.getCoreCapability();	
+		CreateQueues queueObj = new CreateQueues();
+		if(mqObj.E2EintegrationString.equals("VGTA-->MQ-->MQ-->VGTA") ) {
+			String readerString = "VIA can set up the Integration for you. Type 1 if Yes Type 0 if No";
+			System.out.println(readerString);
+			Scanner reader = new Scanner(System.in);
+			String inputValue = reader.next();
+			int choice = mqObj.ValidateUserInputs(inputValue,readerString,1 );
+			if(choice == 1) {
+				queueObj.createMqObjects();
+			}
+			
+		}
+		
+		System.out.println("\nVIA Exiting. Thanks for using. Bye...");
+		
+	}
+
+}

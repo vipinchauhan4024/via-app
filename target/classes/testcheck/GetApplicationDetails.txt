@@ -1,0 +1,23 @@
+package testcheck;
+
+import java.security.PublicKey;
+
+
+
+public class GetApplicationDetails {
+	  String csvFile = "C:\\MyData\\VolvoData\\VolvoProjectWork\\1.ProjectsFrom2013\\ADT\\E2E\\MISP.txt";
+	  String csvLineArray[]=null;
+	  
+	  GetApplicationDetails(String apmid){
+		  GetLinefromCSV csv = new GetLinefromCSV();
+		  String csvLine = csv.getLine(csvFile, apmid);
+		  csvLineArray = csvLine.split(",");
+	  }
+	
+	  public String getQmgrName() {
+		  return csvLineArray[2];
+	  }
+	  public String getMispID() {
+		  return csvLineArray[1];
+	  }
+}
