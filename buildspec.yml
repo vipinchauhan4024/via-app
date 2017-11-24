@@ -13,8 +13,8 @@ phases:
       - mvn install -Dmaven.test.skip=true
   post_build:
     commands:
-      - echo Build completed on `date`
+      - mvn package
 artifacts:
   files:
- - target/VIA-app.war
-   discard-paths: yes
+  - '**/*'
+  base-directory: 'target/VIA-app'
